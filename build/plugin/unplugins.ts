@@ -29,12 +29,12 @@ export const configUnplugins = () => {
         'pinia',
         'vue-router',
         'vue-i18n',
-        'vitest'
-        // { '@vueuse/core': ['useFullscreen', 'createFetch'] },
-        // { 'lodash-es': ['kebabCase'] }
+        'vitest',
+        { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage'] },
+        { 'lodash-es': ['isNil'] }
       ],
       eslintrc: {
-        enabled: false,
+        enabled: true,
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },

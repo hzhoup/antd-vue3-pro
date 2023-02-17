@@ -32,6 +32,7 @@ export default defineConfig(({ command, mode }) => {
     envPrefix: ['VITE_', 'APP_'],
     resolve: {
       alias: [
+        { find: 'vue-i18n', replacement: 'vue-i18n/dist/vue-i18n.cjs.js' },
         { find: '@/', replacement: resolvePath('src') + '/' },
         { find: '#/', replacement: resolvePath('types') + '/' }
       ]
