@@ -1,4 +1,4 @@
-import type { PropType as VuePropType, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, PropType as VuePropType, VNodeChild } from 'vue'
 
 declare global {
   const __APP_INFO__: {
@@ -33,6 +33,8 @@ declare global {
     VITE_PUBLIC_PATH?: string
     // 代理对
     VITE_PROXY?: [string, string][]
+    // 是否开启 polyfills
+    VITE_LEGACY?: boolean
   }
 }
 
