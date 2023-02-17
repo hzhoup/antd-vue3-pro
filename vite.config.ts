@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import dayjs from 'dayjs'
 import { resolve } from 'path'
 import * as process from 'process'
@@ -63,6 +64,16 @@ export default defineConfig(({ command, mode }) => {
     define: {
       __APP_INFO__: JSON.stringify(__APP_INFO__)
     },
-    plugins: createVitePlugins(viteEnv, isBuild)
+    plugins: createVitePlugins(viteEnv, isBuild),
+    test: {
+      globals: true,
+      environment: 'jsdom',
+      coverage: {
+        provider: 'c8'
+      },
+      transformMode: {
+        web: [/.[tj]sx$/]
+      }
+    }
   }
 })

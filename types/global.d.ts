@@ -28,16 +28,14 @@ declare global {
 
   declare interface ViteEnv {
     // 开发端口
-    VITE_PORT: number
+    VITE_PORT?: number
     // base 路径
-    VITE_PUBLIC_PATH: string
+    VITE_PUBLIC_PATH?: string
     // 代理对
-    VITE_PROXY: [string, string][]
+    VITE_PROXY?: [string, string][]
   }
 }
 
 declare module 'vue' {
-  export type JSXComponent<Props = any> =
-    | { new(): ComponentPublicInstance<Props> }
-    | FunctionalComponent<Props>;
+  export type JSXComponent<Props = any> = { new (): ComponentPublicInstance<Props> } | FunctionalComponent<Props>
 }
