@@ -34,7 +34,7 @@ export const configUnplugins = () => {
         // { 'lodash-es': ['kebabCase'] }
       ],
       eslintrc: {
-        enabled: true,
+        enabled: false,
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },
