@@ -3,6 +3,7 @@ import { primaryColor } from './build/config/theme'
 
 export default defineConfig({
   darkMode: 'class',
+  include: ['index.html', 'src/**/*.{vue,html,jsx,tsx}'],
   plugins: [createEnterPlugin()],
   theme: {
     colors: {
@@ -18,7 +19,8 @@ export default defineConfig({
     zIndex: {
       '-1': '-1'
     }
-  }
+  },
+  safelist: []
 })
 
 /**

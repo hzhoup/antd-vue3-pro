@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production vite build",
     "build:test": "cross-env vite build --mode test",
     "build:no-cache": "yarn clean:cache && npm run build",
-    "test": "vitest",
+    "test": "vitest run",
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "type:check": "vue-tsc --noEmit --skipLibCheck",
