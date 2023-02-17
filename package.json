@@ -18,10 +18,15 @@
     "reinstall": "rimraf yarn.lock && rimraf node_modules && npm run bootstrap"
   },
   "dependencies": {
+    "@ant-design/colors": "^7.0.0",
+    "ant-design-vue": "^3.2.15",
+    "dayjs": "^1.11.7",
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "less": "^4.1.3",
     "rimraf": "^4.1.2",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
