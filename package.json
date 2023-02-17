@@ -4,14 +4,25 @@
   "scripts": {
     "bootstrap": "yarn install",
     "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build": "cross-env NODE_ENV=production vite build",
+    "build:test": "cross-env vite build --mode test",
+    "build:no-cache": "yarn clean:cache && npm run build",
+    "type:check": "vue-tsc --noEmit --skipLibCheck",
+    "preview": "npm run build && vite preview",
+    "preview:dist": "vite preview",
+    "clean:cache": "rimraf node_modules/.cache/ && rimraf node_modules/.vite",
+    "clean:lib": "rimraf node_modules",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx,js,jsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,jsx,json,ts,tsx,css,less,scss,vue,html,md}\"",
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
+    "reinstall": "rimraf yarn.lock && rimraf node_modules && npm run bootstrap"
   },
   "dependencies": {
     "vue": "^3.2.45"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
+    "rimraf": "^4.1.2",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vue-tsc": "^1.0.24"
