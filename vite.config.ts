@@ -10,19 +10,19 @@ import pkg from './package.json'
 
 const resolvePath = (...paths: string[]) => resolve(__dirname, ...paths)
 
-const {name, version, dependencies, devDependencies} = pkg
+const { name, version, dependencies, devDependencies } = pkg
 const __APP_INFO__ = {
-  pkg: {name, version, dependencies, devDependencies},
+  pkg: { name, version, dependencies, devDependencies },
   lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss')
 }
 
 // https://vitejs.dev/config/
-export default defineConfig(({command, mode}) => {
+export default defineConfig(({ command, mode }) => {
   const root = process.cwd()
 
   const env = loadEnv(mode, root, ['VITE_', 'APP_'])
   const viteEnv = wrapperEnv(env)
-  const {VITE_PUBLIC_PATH, VITE_PORT, VITE_PROXY} = viteEnv
+  const { VITE_PUBLIC_PATH, VITE_PORT, VITE_PROXY } = viteEnv
 
   const isBuild = command === 'build'
 
@@ -32,8 +32,8 @@ export default defineConfig(({command, mode}) => {
     envPrefix: ['VITE_', 'APP_'],
     resolve: {
       alias: [
-        {find: '@/', replacement: resolvePath('src') + '/'},
-        {find: '#/', replacement: resolvePath('types') + '/'}
+        { find: '@/', replacement: resolvePath('src') + '/' },
+        { find: '#/', replacement: resolvePath('types') + '/' }
       ]
     },
     server: {
