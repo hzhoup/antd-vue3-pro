@@ -41,16 +41,16 @@ export default defineConfig(({command, mode}) => {
       port: VITE_PORT,
       proxy: createProxy(VITE_PROXY)
     },
+    esbuild: {
+      pure: isBuild ? ['console.log', 'debugger'] : []
+    },
     build: {
       target: 'es2015',
-      terserOptions: {
-        compress: {
-          keep_infinity: true,
-          drop_console: true
-        }
-      },
+      cssTarget: 'chrome80',
       brotliSize: false,
-      chunkSizeWarningLimit: 2000
+      reportCompressedSize: false,
+      chunkSizeWarningLimit: 2048,
+      assetsInlineLimit: 2048
     },
     css: {
       preprocessorOptions: {

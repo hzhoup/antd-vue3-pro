@@ -21,7 +21,8 @@
       "ESNext"
     ],
     "types": [
-      "vite/client"
+      "vite/client",
+      "unplugin-vue-macros/macros-global"
     ],
     "typeRoots": [
       "./node_modules/@types",
