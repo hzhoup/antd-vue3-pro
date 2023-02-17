@@ -7,5 +7,5 @@ export const darkMode = false
 type GenerateTheme = 'default' | 'dark'
 
 export function generateAntdColors(color: string, theme: GenerateTheme = 'default') {
-  return generate(color, {theme})
+  return generate(color, { theme })
 }

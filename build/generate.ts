@@ -12,7 +12,7 @@ export function generateModifyVars(dark = false) {
     primaryColorObj[`primary-${index + 1}`] = palettes[index]
   }
 
-  const modifyVars = getThemeVariables({dark})
+  const modifyVars = getThemeVariables({ dark })
 
   return {
     ...modifyVars,

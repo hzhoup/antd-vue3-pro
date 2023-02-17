@@ -3,7 +3,6 @@ import dayjs from 'dayjs'
 import { resolve } from 'path'
 import * as process from 'process'
 import { defineConfig, loadEnv } from 'vite'
-import { generateModifyVars } from './build/generate'
 import { createVitePlugins } from './build/plugin'
 import { createProxy } from './build/proxy'
 import { wrapperEnv } from './build/utils'
@@ -56,7 +55,6 @@ export default defineConfig(({ command, mode }) => {
     css: {
       preprocessorOptions: {
         less: {
-          modifyVars: generateModifyVars(),
           javascriptEnabled: true
         }
       }
