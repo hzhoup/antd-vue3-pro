@@ -35,6 +35,10 @@ declare global {
     VITE_PROXY?: [string, string][]
     // 是否开启 polyfills
     VITE_LEGACY?: boolean
+    // 是否启用压缩
+    VITE_BUILD_COMPRESS?: 'gzip' | 'brotli' | 'none'
+    // 启用压缩是否删除源文件
+    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE?: boolean
   }
 }
 
