@@ -1,3 +1,4 @@
+import { setupStore } from '@/store'
 import { setupAssets } from '@/styles/setupAssets'
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -11,6 +12,8 @@ async function boostrap() {
   appLoad.mount('#app-load')
 
   const app = createApp(App)
+
+  setupStore(app)
 
   app.mount('#app')
 }

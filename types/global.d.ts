@@ -39,6 +39,9 @@ declare global {
     VITE_BUILD_COMPRESS?: 'gzip' | 'brotli' | 'none'
     // 启用压缩是否删除源文件
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE?: boolean
+
+    // 应用前缀
+    APP_SHORT_NAME: string
   }
 }
 
