@@ -1,9 +1,12 @@
+import { i18n } from '@/locales/setupI18n'
+import { useTitle } from '@vueuse/core'
 import { Modal, notification } from 'ant-design-vue'
 import NProgress from 'nprogress'
 import { Router } from 'vue-router'
 
 export function createRouterGuard(router: Router) {
   createPageGuard(router)
+  createHtmlTitleGuard(router)
   destroyMessageGuard(router)
   createNProgressGuard(router)
 }
@@ -21,6 +24,18 @@ export function createPageGuard(router: Router) {
 
   router.afterEach(to => {
     loadedPageMap.set(to.path, true)
+  })
+}
+
+export function createHtmlTitleGuard(router: Router) {
+  router.afterEach(to => {
+    if (to.meta?.title) {
+      const localeTitle = i18n.global.t(to.meta.title)
+      const title = localeTitle ? `${localeTitle} ${import.meta.env.APP_TITLE}` : `${import.meta.env.APP_TITLE}`
+      useTitle(title)
+    } else {
+      useTitle(`${import.meta.env.APP_TITLE}`)
+    }
   })
 }
 
