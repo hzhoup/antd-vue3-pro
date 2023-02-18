@@ -3,6 +3,7 @@ import { setupI18n } from '@/locales/setupI18n'
 import { setupRouter } from '@/router'
 import { setupStore } from '@/store'
 import { setupAssets } from '@/styles/setupAssets'
+import { setupErrorHandle } from '@/utils/errors'
 import { createApp } from 'vue'
 import App from './App.vue'
 import AppLoad from './AppLoad.vue'
@@ -28,6 +29,9 @@ async function boostrap() {
 
   // 注册全局指令
   setupGlobDirectives(app)
+
+  // 注册全局错误处理
+  setupErrorHandle(app)
 
   app.mount('#app')
 }
