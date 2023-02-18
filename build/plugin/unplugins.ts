@@ -31,7 +31,7 @@ export const configUnplugins = () => {
         'vue-i18n',
         'vitest',
         { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage'] },
-        { 'lodash-es': ['isNil'] }
+        { 'lodash-es': ['isNil', 'set'] }
       ],
       eslintrc: {
         enabled: false,

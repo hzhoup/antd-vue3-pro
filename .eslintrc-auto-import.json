@@ -64,6 +64,7 @@
     "readonly": true,
     "ref": true,
     "resolveComponent": true,
+    "set": true,
     "setActivePinia": true,
     "setMapStoreSuffix": true,
     "shallowReactive": true,

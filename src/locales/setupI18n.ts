@@ -14,7 +14,7 @@ async function createI18nOptions(): Promise<I18nOptions> {
   const availableLocales = localeStorage.value.availableLocales
 
   const defaultLocale = await import(`./lang/${locale}.ts`)
-  const message = defaultLocale?.default ?? {}
+  const message = defaultLocale.default?.message ?? {}
 
   setHtmlLang(locale)
 

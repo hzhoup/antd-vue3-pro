@@ -21,7 +21,7 @@ export interface ErrorLogInfo {
   time?: string
 }
 
-export const useErrorLogStore = defineStore('error_log', () => {
+export const useErrorLogStore = defineStore('app_error_log', () => {
   const errLogInfo = ref<Nullable<ErrorLogInfo[]>>(null)
   const errLogCount = ref<number>(0)
 
