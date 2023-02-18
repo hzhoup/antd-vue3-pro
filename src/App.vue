@@ -1,3 +1,3 @@
 <template>
-  <div>{{ $t('title') }}</div>
+  <router-view />
 </template>

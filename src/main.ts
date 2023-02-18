@@ -1,4 +1,5 @@
 import { setupI18n } from '@/locales/setupI18n'
+import { setupRouter } from '@/router'
 import { setupStore } from '@/store'
 import { setupAssets } from '@/styles/setupAssets'
 import { createApp } from 'vue'
@@ -17,6 +18,8 @@ async function boostrap() {
   setupStore(app)
 
   await setupI18n(app)
+
+  await setupRouter(app)
 
   app.mount('#app')
 }
