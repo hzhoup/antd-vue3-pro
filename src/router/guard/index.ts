@@ -30,6 +30,8 @@ export function createPageGuard(router: Router) {
 export function createHtmlTitleGuard(router: Router) {
   router.afterEach(to => {
     if (to.meta?.title) {
+      // 库问题 无法解决
+      // @ts-ignore
       const localeTitle = i18n.global.t(to.meta.title)
       const title = localeTitle ? `${localeTitle} ${import.meta.env.APP_TITLE}` : `${import.meta.env.APP_TITLE}`
       useTitle(title)
