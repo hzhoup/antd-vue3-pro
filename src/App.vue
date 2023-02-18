@@ -1,7 +1,7 @@
 <template>
-  <a-configprovider :locale="getAntdLocale">
+  <a-config-provider :locale="getAntdLocale" component-size="middle" space="middle">
     <router-view />
-  </a-configprovider>
+  </a-config-provider>
 </template>
 
 <script lang="ts" setup>
