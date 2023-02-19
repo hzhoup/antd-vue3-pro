@@ -33,7 +33,7 @@ async function boostrap() {
   // 注册全局错误处理
   setupErrorHandle(app)
 
-  // app.mount('#app')
+  app.mount('#app')
 }
 
 await boostrap()
