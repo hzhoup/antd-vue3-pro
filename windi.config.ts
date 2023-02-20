@@ -10,11 +10,9 @@ export default defineConfig({
       primary: primaryColor
     },
     screens: {
-      sm: '576px',
-      md: '768px',
-      lg: '992px',
-      xl: '1200px',
-      '2xl': '1600px'
+      tablet: '640px',
+      laptop: '1024px',
+      desktop: '1280px'
     },
     zIndex: {
       '-1': '-1'

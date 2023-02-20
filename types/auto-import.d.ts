@@ -76,6 +76,7 @@ declare global {
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useBreakpoints: typeof import('@vueuse/core')['useBreakpoints']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useFullscreen: typeof import('@vueuse/core')['useFullscreen']

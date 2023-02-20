@@ -13,7 +13,7 @@ export const configUnplugins = () => {
     components({
       resolvers: [
         AntDesignVueResolver({ importStyle: 'less' }),
-        iconsResolver({ prefix: 'icon', customCollections: ['custom'] })
+        iconsResolver({ prefix: 'icon', alias: { 'park-outline': 'icon-park-outline' }, customCollections: ['custom'] })
       ],
       dirs: ['src/components'],
       extensions: ['vue', 'tsx'],
@@ -30,7 +30,7 @@ export const configUnplugins = () => {
         'vue-router',
         'vue-i18n',
         'vitest',
-        { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage'] },
+        { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage', 'useBreakpoints'] },
         { 'lodash-es': ['isNil', 'set'] }
       ],
       eslintrc: {

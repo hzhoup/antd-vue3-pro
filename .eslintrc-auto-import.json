@@ -79,6 +79,7 @@
     "triggerRef": true,
     "unref": true,
     "useAttrs": true,
+    "useBreakpoints": true,
     "useCssModule": true,
     "useCssVars": true,
     "useFullscreen": true,
