@@ -1,6 +1,8 @@
 export enum PageEnum {
   ROOT_NAME = 'home',
   ROOT_REDIRECT = '/dashboard/workplace',
+  LOGIN_NAME = 'login',
+  REDIRECT_NAME = 'Redirect',
   PAGE_NOT_FOUND_NAME = 'PageNotFound'
 }
 

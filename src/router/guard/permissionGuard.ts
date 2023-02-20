@@ -1,5 +1,6 @@
 import { WHITE_ROUTE_NAMES } from '@/router'
 import { createDynamicRoute } from '@/router/guard/dynamic'
+import { PageEnum } from '@/setting/pageEnum'
 import { useAuthStore } from '@/store/modules/auth'
 import { useUserStore } from '@/store/modules/user'
 import { exeStrategyActions } from '@/utils/common/pattern'
@@ -24,7 +25,7 @@ export async function createPermissionGuard(router: Router) {
     const actions: StrategyAction[] = [
       // 已登录跳转登录页，跳转至首页
       [
-        isLogin && to.name === 'login',
+        isLogin && to.name === PageEnum.LOGIN_NAME,
         () => {
           next({ path: '/' })
         }
@@ -41,7 +42,7 @@ export async function createPermissionGuard(router: Router) {
         !isLogin && needLogin,
         () => {
           const redirect = to.fullPath
-          next({ path: 'login/pwd-login', query: { redirect } })
+          next({ path: `/login/pwd-login`, query: { redirect } })
         }
       ],
       // 有相关权限且已登录

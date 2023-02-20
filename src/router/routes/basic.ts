@@ -7,7 +7,7 @@ export const LOGIN_ROUTE: RouteRecordRaw = {
   component: BLANK_LAYOUT,
   children: [
     {
-      name: 'login',
+      name: PageEnum.LOGIN_NAME,
       path: '/login/:module',
       props: route => {
         const moduleType = route.params?.module ?? 'pwd-login'
@@ -24,7 +24,7 @@ export const REDIRECT_ROUTE: RouteRecordRaw = {
   children: [
     {
       path: '/redirect/:path(.*)',
-      name: 'Redirect',
+      name: PageEnum.REDIRECT_NAME,
       component: REDIRECT_PAGE
     }
   ]

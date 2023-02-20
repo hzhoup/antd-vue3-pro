@@ -4,12 +4,12 @@ import { Modal, notification } from 'ant-design-vue'
 import NProgress from 'nprogress'
 import { Router } from 'vue-router'
 
-export function createRouterGuard(router: Router) {
+export async function createRouterGuard(router: Router) {
   createPageGuard(router)
   createHtmlTitleGuard(router)
   destroyMessageGuard(router)
   createNProgressGuard(router)
-  createPermissionGuard(router)
+  await createPermissionGuard(router)
 }
 
 /**
