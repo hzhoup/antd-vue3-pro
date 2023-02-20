@@ -1,5 +1,5 @@
 import { ErrorTypeEnum } from '@/setting/exception'
-import { ErrorLogInfo, useErrorLogStoreWithOut } from '@/store/errorLogStore'
+import { ErrorLogInfo, useErrorLogStoreWithOut } from '@/store/modules/errorLog'
 import type { App, ComponentPublicInstance } from 'vue'
 
 function processStackMsg(error: Error) {

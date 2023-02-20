@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useLocaleStore } from '@/store/locale'
+import { useLocaleStore } from '@/store/modules/locale'
 import subscribeStore from '@/store/subscribe'
 
 const { getAntdLocale } = useLocaleStore()

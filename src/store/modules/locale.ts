@@ -1,6 +1,6 @@
 import { i18n } from '@/locales/setupI18n'
 import { localeSetting } from '@/setting/localeEnum'
-import { pinia } from '@/store/index'
+import { pinia } from '@/store'
 
 export const useLocaleStore = defineStore(
   'app_locale',

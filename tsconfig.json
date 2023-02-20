@@ -16,27 +16,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
-    "lib": [
-      "DOM",
-      "ESNext"
-    ],
-    "types": [
-      "vite/client",
-      "unplugin-vue-macros/macros-global"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
+    "lib": ["DOM", "ESNext"],
+    "types": ["vite/client", "unplugin-vue-macros/macros-global", "unplugin-icons/types/vue"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "noImplicitAny": false,
     "skipLibCheck": true,
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "#/*": [
-        "types/*"
-      ]
+      "@/*": ["src/*"],
+      "#/*": ["types/*"]
     }
   },
   "include": [

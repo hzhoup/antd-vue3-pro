@@ -1,5 +1,5 @@
 import { ErrorTypeEnum } from '@/setting/exception'
-import { pinia } from '@/store/index'
+import { pinia } from '@/store'
 import dayjs from 'dayjs'
 
 export interface ErrorLogInfo {

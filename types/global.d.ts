@@ -44,6 +44,8 @@ declare global {
     APP_TITLE: string
     // 应用前缀
     APP_SHORT_NAME: string
+    // 请求基本路径
+    APP_BASE_URL: string
   }
 }
 

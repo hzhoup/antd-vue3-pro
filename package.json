@@ -40,6 +40,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@iconify-json/ant-design": "^1.1.5",
     "@iconify-json/icon-park-outline": "^1.1.10",
     "@types/lodash-es": "^4.17.6",
     "@types/node": "^18.13.0",

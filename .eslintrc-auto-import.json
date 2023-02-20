@@ -36,6 +36,7 @@
     "isReactive": true,
     "isReadonly": true,
     "isRef": true,
+    "isString": true,
     "it": true,
     "mapActions": true,
     "mapGetters": true,

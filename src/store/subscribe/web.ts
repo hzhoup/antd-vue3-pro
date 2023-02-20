@@ -1,5 +1,5 @@
 import { DeviceTypeEnum } from '@/setting/pageEnum'
-import { useSettingStore } from '@/store/settingStore'
+import { useSettingStore } from '@/store/modules/setting'
 
 export default function subscribeWebStore() {
   const breakpoints = useBreakpoints({
