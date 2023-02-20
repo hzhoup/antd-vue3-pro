@@ -36,11 +36,9 @@ export function resultError(errorMessage = 'Request failed', { errorCode = -1, d
 
 export function pagination<T = any>(pageNo: number, pageSize: number, array: T[]): T[] {
   const offset = (pageNo - 1) * Number(pageSize)
-  const ret =
-    offset + Number(pageSize) >= array.length
-      ? array.slice(offset, array.length)
-      : array.slice(offset, offset + Number(pageSize))
-  return ret
+  return offset + Number(pageSize) >= array.length
+    ? array.slice(offset, array.length)
+    : array.slice(offset, offset + Number(pageSize))
 }
 
 export interface requestParams {
