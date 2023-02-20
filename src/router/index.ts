@@ -6,11 +6,12 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 /**
  * 白名单
  */
-const WHITE_ROUTE_NAMES: string[] = []
+export const WHITE_ROUTE_NAMES: string[] = []
 
 function getWhiteRoutesName(array: RouteRecordRaw[]) {
   array.forEach(route => {
-    WHITE_ROUTE_NAMES.push(route.name as string)
+    route.name && WHITE_ROUTE_NAMES.push(route.name as string)
+    if (route.children?.length) getWhiteRoutesName(route.children)
   })
 }
 

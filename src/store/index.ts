@@ -1,4 +1,4 @@
-import { getStorageShortName } from '@/utils/env'
+import { getStorageShortName } from '@/utils/common/env'
 import { createPinia } from 'pinia'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { App } from 'vue'

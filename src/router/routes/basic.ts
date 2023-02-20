@@ -4,9 +4,9 @@ import { RouteRecordRaw } from 'vue-router'
 export const LOGIN_ROUTE: RouteRecordRaw = {
   path: '/login',
   component: BLANK_LAYOUT,
-  name: 'Login',
   children: [
     {
+      name: 'login',
       path: '/login/:module',
       props: route => {
         const moduleType = route.params?.module ?? 'pwd-login'
@@ -20,10 +20,10 @@ export const LOGIN_ROUTE: RouteRecordRaw = {
 export const REDIRECT_ROUTE: RouteRecordRaw = {
   path: '/redirect',
   component: BLANK_LAYOUT,
-  name: 'Redirect',
   children: [
     {
       path: '/redirect/:path(.*)',
+      name: 'Redirect',
       component: REDIRECT_PAGE
     }
   ]
@@ -31,10 +31,10 @@ export const REDIRECT_ROUTE: RouteRecordRaw = {
 
 export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
   path: '/:path(.*)*',
-  name: 'PageNotFound',
   component: BLANK_LAYOUT,
   children: [
     {
+      name: 'PageNotFound',
       path: '/:path(.*)*',
       component: EXCEPTION_PAGE
     }

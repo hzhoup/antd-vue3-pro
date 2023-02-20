@@ -30,7 +30,7 @@ export const configUnplugins = () => {
         'vue-router',
         'vue-i18n',
         'vitest',
-        { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage', 'useBreakpoints'] },
+        { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage', 'useBreakpoints', 'useTitle'] },
         { 'lodash-es': ['isNil', 'set', 'isString'] }
       ],
       eslintrc: {

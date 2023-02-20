@@ -1,5 +1,5 @@
 import { i18n } from '@/locales/setupI18n'
-import { useTitle } from '@vueuse/core'
+import { createPermissionGuard } from '@/router/guard/permissionGuard'
 import { Modal, notification } from 'ant-design-vue'
 import NProgress from 'nprogress'
 import { Router } from 'vue-router'
@@ -9,6 +9,7 @@ export function createRouterGuard(router: Router) {
   createHtmlTitleGuard(router)
   destroyMessageGuard(router)
   createNProgressGuard(router)
+  createPermissionGuard(router)
 }
 
 /**

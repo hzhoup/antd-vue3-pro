@@ -1,5 +1,5 @@
 export enum PageEnum {
-  ROOT_REDIRECT = '/login/pwd-login'
+  ROOT_REDIRECT = '/dashboard/workplace'
 }
 
 export enum DeviceTypeEnum {

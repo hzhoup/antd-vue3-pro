@@ -1,6 +1,6 @@
 import { setHtmlLang } from '@/locales/helpers'
 import { localeSetting } from '@/setting/localeEnum'
-import { getStorageShortName } from '@/utils/env'
+import { getStorageShortName } from '@/utils/common/env'
 import type { App } from 'vue'
 import type { I18nOptions } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'

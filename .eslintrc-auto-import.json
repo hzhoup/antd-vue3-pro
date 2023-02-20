@@ -90,6 +90,7 @@
     "useRouter": true,
     "useSlots": true,
     "useStorage": true,
+    "useTitle": true,
     "vi": true,
     "vitest": true,
     "watch": true,

@@ -1,5 +1,6 @@
 interface AuthStore {
   token?: string
+  permissions?: string[]
 }
 
 export const useAuthStore = defineStore(

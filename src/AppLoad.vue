@@ -12,12 +12,14 @@
             class="absolute w-16px h-16px bg-[#0065cc] rounded-8px animate-pulse"></div>
         </div>
       </div>
-      <div class="flex-center text-30px text-[rgb(0 0 0 / 85%)] font-bold">研发数智化系统</div>
+      <div class="flex-center text-30px text-[rgb(0 0 0 / 85%)] font-bold">{{ title }}</div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+const title = import.meta.env.APP_TITLE
+
 const lodingClasses = [
   'left-0 top-0',
   'left-0 bottom-0 animate-delay-500',

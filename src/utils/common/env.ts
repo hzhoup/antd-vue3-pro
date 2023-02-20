@@ -1,4 +1,4 @@
-import pkg from '../../package.json'
+import pkg from '../../../package.json'
 
 /**
  * 获取缓存前缀
