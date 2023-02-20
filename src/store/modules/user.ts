@@ -1,4 +1,9 @@
 import { useGet } from '@/hooks/request'
+import { router } from '@/router'
+import { RootRoute } from '@/router/routes'
+import { findFirstLeaves, listToTree } from '@/utils/common/tree'
+import { cloneDeep } from 'lodash-es'
+import { RouteRecordRaw } from 'vue-router'
 
 export type GlobalMenu = {
   id: number
@@ -42,14 +47,43 @@ export const useUserStore = defineStore('user-store', () => {
     cacheRoutes: []
   })
 
+  function updateRootRedirect(menus) {
+    const menusTree = listToTree(menus)
+    const newRedirect = findFirstLeaves(menusTree[0]).url
+    const routRoute = { ...RootRoute, redirect: newRedirect }
+    router.addRoute(routRoute)
+  }
+
+  function handleAuthRoute(menus) {
+    const modules = import.meta.glob(['@/views/**/**.vue', '!**/components/**/**.vue'])
+    for (const menu of menus) {
+      const comPath = Object.keys(modules).find(key => key.includes(`${menu.url}/index.vue`))
+      if (comPath) {
+        const vueRoutes: RouteRecordRaw = {
+          path: menu.url,
+          name: menu.url.substring(menu.url.lastIndexOf('/')),
+          component: modules[comPath],
+          meta: {
+            name: menu.name,
+            perms: menu.perms,
+            icon: menu.icon
+          }
+        }
+        router.addRoute(vueRoutes)
+        state.cacheRoutes.push(vueRoutes.name as string)
+      }
+    }
+  }
+
   async function initDynamicRoute() {
     const { execute, data, error } = useGet<{ menus: GlobalMenu[]; user: GlobalUserInfo }>('/user/info')
     await execute()
     if (!error.value && data.value) {
-      console.log(data.value)
       const { menus, user } = data.value
       state.menus = menus
       state.info = user
+      updateRootRedirect(cloneDeep(menus))
+      handleAuthRoute(cloneDeep(menus))
     }
   }
 

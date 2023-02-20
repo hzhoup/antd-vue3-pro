@@ -14,6 +14,7 @@ const useRequest = createFetch({
     timeout: 30000,
     beforeFetch({ options }) {
       const auth = useAuthStore()
+      console.log(auth.token)
       options.headers = Object.assign(options.headers || {}, {
         'Access-Token': auth.token
       })
@@ -21,26 +22,22 @@ const useRequest = createFetch({
       return { options }
     },
     afterFetch({ data, response }) {
-      const { toLoginModule } = useRouterPush()
+      const { toLoginModule } = useRouterPush(false)
       const { createMessage } = useMessage()
-      const status = response.status
 
       isDevMode() && appLog(JSON.stringify(data))
 
-      switch (status) {
-        case 200:
-          data = data.data || {}
-          break
-        case 401:
-          createMessage.warning(data.errorMessage || '登录已过期')
-          setTimeout(() => {
-            toLoginModule('pwd-login')
-          }, 1500)
-          data = null
-          break
-        default:
-          createMessage.warning(data.errorMessage || '未知错误,请联系管理员')
-          data = null
+      if (data.success && !data.errorCode) {
+        data = data.data || {}
+      } else if (!data.success && data.errorCode === '401') {
+        createMessage.warning(data.errorMessage || '登录已过期')
+        setTimeout(() => {
+          toLoginModule('pwd-login')
+        }, 1500)
+        data = null
+      } else {
+        createMessage.warning(data.errorMessage || '未知错误,请联系管理员')
+        data = null
       }
 
       return { data, response }

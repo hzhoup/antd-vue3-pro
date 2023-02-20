@@ -31,10 +31,10 @@ export const configUnplugins = () => {
         'vue-i18n',
         'vitest',
         { '@vueuse/core': ['useFullscreen', 'createFetch', 'useStorage', 'useBreakpoints', 'useTitle'] },
-        { 'lodash-es': ['isNil', 'set', 'isString'] }
+        { 'lodash-es': ['isNil', 'set', 'isString', 'filter', 'minBy'] }
       ],
       eslintrc: {
-        enabled: false,
+        enabled: true,
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },

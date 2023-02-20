@@ -49,5 +49,5 @@ export interface requestParams {
 }
 
 export function getRequestToken({ headers }: requestParams): string | undefined {
-  return headers?.['Access-Token']
+  return headers?.['access-token']
 }

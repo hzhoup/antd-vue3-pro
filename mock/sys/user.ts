@@ -37,7 +37,7 @@ export function createFakeUserList() {
         },
         {
           id: 2,
-          parentId: 23,
+          parentId: 1,
           name: '工作台',
           icon: 'workplace',
           url: '/dashboard/workplace',
