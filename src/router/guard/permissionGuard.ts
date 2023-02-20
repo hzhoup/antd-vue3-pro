@@ -1,15 +1,19 @@
+import { createDynamicRoute } from '@/router/guard/dynamic'
 import { useAuthStore } from '@/store/modules/auth'
 import { exeStrategyActions } from '@/utils/common/pattern'
 import type { Router } from 'vue-router'
 
 export type StrategyAction = [boolean, () => void]
 
-export function createPermissionGuard(router: Router) {
+export async function createPermissionGuard(router: Router) {
   const auth = useAuthStore()
 
   const isLogin = Boolean(auth.token)
 
-  router.beforeEach(async (to, _from, next) => {
+  router.beforeEach(async (to, form, next) => {
+    const permission = await createDynamicRoute(to, form, next)
+    if (!permission) return
+
     useTitle('⏳⏳⏳ 加载中...')
 
     const permissions = auth.permissions || []
