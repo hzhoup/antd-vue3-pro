@@ -39,6 +39,8 @@ declare global {
     VITE_BUILD_COMPRESS?: 'gzip' | 'brotli' | 'none'
     // 启用压缩是否删除源文件
     VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE?: boolean
+    // 是否启用 mock 数据
+    VITE_MOCK: string
 
     // 应用名称
     APP_TITLE: string
