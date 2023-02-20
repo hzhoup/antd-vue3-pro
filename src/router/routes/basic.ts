@@ -1,4 +1,5 @@
 import { BLANK_LAYOUT, EXCEPTION_PAGE, LOGIN_PAGE, REDIRECT_PAGE } from '@/router/routes/constant'
+import { PageEnum } from '@/setting/pageEnum'
 import { RouteRecordRaw } from 'vue-router'
 
 export const LOGIN_ROUTE: RouteRecordRaw = {
@@ -34,7 +35,7 @@ export const PAGE_NOT_FOUND_ROUTE: RouteRecordRaw = {
   component: BLANK_LAYOUT,
   children: [
     {
-      name: 'PageNotFound',
+      name: PageEnum.PAGE_NOT_FOUND_NAME,
       path: '/:path(.*)*',
       component: EXCEPTION_PAGE
     }

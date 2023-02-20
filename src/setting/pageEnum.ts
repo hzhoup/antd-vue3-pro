@@ -1,5 +1,7 @@
 export enum PageEnum {
-  ROOT_REDIRECT = '/dashboard/workplace'
+  ROOT_NAME = 'home',
+  ROOT_REDIRECT = '/dashboard/workplace',
+  PAGE_NOT_FOUND_NAME = 'PageNotFound'
 }
 
 export enum DeviceTypeEnum {

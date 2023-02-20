@@ -4,7 +4,7 @@ import { RouteRecordRaw } from 'vue-router'
 
 export const RootRoute: RouteRecordRaw = {
   path: '/',
-  name: 'Root',
+  name: PageEnum.ROOT_NAME,
   redirect: PageEnum.ROOT_REDIRECT
 }
 

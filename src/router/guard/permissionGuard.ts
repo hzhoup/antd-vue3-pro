@@ -1,5 +1,7 @@
+import { WHITE_ROUTE_NAMES } from '@/router'
 import { createDynamicRoute } from '@/router/guard/dynamic'
 import { useAuthStore } from '@/store/modules/auth'
+import { useUserStore } from '@/store/modules/user'
 import { exeStrategyActions } from '@/utils/common/pattern'
 import type { Router } from 'vue-router'
 
@@ -7,19 +9,18 @@ export type StrategyAction = [boolean, () => void]
 
 export async function createPermissionGuard(router: Router) {
   const auth = useAuthStore()
-
-  const isLogin = Boolean(auth.token)
+  const user = useUserStore()
 
   router.beforeEach(async (to, form, next) => {
-    const permission = await createDynamicRoute(to, form, next)
-    if (!permission) return
+    const flag = await createDynamicRoute(to, form, next)
+    if (!flag) return
 
     useTitle('⏳⏳⏳ 加载中...')
 
-    const permissions = auth.permissions || []
-    const needLogin = to.name !== 'login'
-    const hasPermission = !permissions.length
-
+    const isLogin = Boolean(auth.token)
+    const permissions = user.permissions
+    const needLogin = !WHITE_ROUTE_NAMES.includes(to.name as string)
+    const hasPermission = !permissions.length || permissions.includes(to.meta?.perms as string)
     const actions: StrategyAction[] = [
       // 已登录跳转登录页，跳转至首页
       [
@@ -45,14 +46,14 @@ export async function createPermissionGuard(router: Router) {
       ],
       // 有相关权限且已登录
       [
-        isLogin && needLogin && hasPermission && false,
+        isLogin && needLogin && hasPermission,
         () => {
           next()
         }
       ],
       // 无相关权限且已登录
       [
-        isLogin && needLogin && !hasPermission && false,
+        isLogin && needLogin && !hasPermission,
         () => {
           next({ name: '403' })
         }
