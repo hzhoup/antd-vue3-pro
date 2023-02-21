@@ -14,7 +14,6 @@ const useRequest = createFetch({
     timeout: 30000,
     beforeFetch({ options }) {
       const auth = useAuthStore()
-      console.log(auth.token)
       options.headers = Object.assign(options.headers || {}, {
         'Access-Token': auth.token
       })

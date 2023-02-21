@@ -1,6 +1,7 @@
 import { useGet } from '@/hooks/request'
 import { router } from '@/router'
 import { RootRoute } from '@/router/routes'
+import { BASIC_LAYOUT } from '@/router/routes/constant'
 import { findFirstLeaves, listToTree } from '@/utils/common/tree'
 import { cloneDeep } from 'lodash-es'
 import { RouteRecordRaw } from 'vue-router'
@@ -55,24 +56,50 @@ export const useUserStore = defineStore('user-store', () => {
   }
 
   function handleAuthRoute(menus) {
+    const menusTree = listToTree(menus)
     const modules = import.meta.glob(['@/views/**/**.vue', '!**/components/**/**.vue'])
-    for (const menu of menus) {
-      const comPath = Object.keys(modules).find(key => key.includes(`${menu.url}/index.vue`))
-      if (comPath) {
-        const vueRoutes: RouteRecordRaw = {
-          path: menu.url,
-          name: menu.url.substring(menu.url.lastIndexOf('/')),
-          component: modules[comPath],
-          meta: {
-            name: menu.name,
-            perms: menu.perms,
-            icon: menu.icon
+
+    function fn(tree) {
+      for (const node of tree) {
+        let vueRoutes = {} as RouteRecordRaw
+        const comPath = Object.keys(modules).find(key => key.includes(`${node.url}/index.vue`))
+        const menuName = node.url.substring(node.url.lastIndexOf('/') + 1)
+        if (node.type === 0) {
+          vueRoutes = {
+            path: node.url,
+            name: menuName,
+            redirect: node?.children[0].url || '/404',
+            meta: {
+              name: node.name,
+              perms: node.perms,
+              icon: node.icon
+            }
           }
+        } else if (node.type === 1 && comPath) {
+          vueRoutes = {
+            path: node.url,
+            component: BASIC_LAYOUT,
+            children: [
+              {
+                path: node.url,
+                name: menuName,
+                component: modules[comPath],
+                meta: {
+                  name: node.name,
+                  perms: node.perms,
+                  icon: node.icon
+                }
+              }
+            ]
+          }
+          state.cacheRoutes.push(menuName)
         }
-        router.addRoute(vueRoutes)
-        state.cacheRoutes.push(vueRoutes.name as string)
+        vueRoutes && router.addRoute(vueRoutes)
+        node.children?.length && fn(node.children)
       }
     }
+
+    fn(menusTree)
   }
 
   async function initDynamicRoute() {
@@ -82,6 +109,7 @@ export const useUserStore = defineStore('user-store', () => {
       const { menus, user } = data.value
       state.menus = menus
       state.info = user
+      state.isInitAuthRoute = true
       updateRootRedirect(cloneDeep(menus))
       handleAuthRoute(cloneDeep(menus))
     }

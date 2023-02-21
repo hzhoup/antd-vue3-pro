@@ -41,7 +41,7 @@ export function createFakeUserList() {
           name: '工作台',
           icon: 'workplace',
           url: '/dashboard/workplace',
-          perms: 'customer:workplace',
+          perms: 'dashboard:workplace',
           seq: 1,
           level: 1,
           type: 1,
