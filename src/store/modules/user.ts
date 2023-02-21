@@ -1,10 +1,10 @@
 import { useGet } from '@/hooks/request'
 import { router } from '@/router'
 import { RootRoute } from '@/router/routes'
-import { BASIC_LAYOUT } from '@/router/routes/constant'
+import { BASIC_LAYOUT, BLANK_LAYOUT } from '@/router/routes/constant'
+import { PageEnum } from '@/setting/pageEnum'
 import { findFirstLeaves, listToTree } from '@/utils/common/tree'
 import { cloneDeep } from 'lodash-es'
-import { RouteRecordRaw } from 'vue-router'
 
 export type GlobalMenu = {
   id: number
@@ -38,6 +38,8 @@ interface UserState {
   menus: GlobalMenu[]
   // 缓存路由名称
   cacheRoutes: string[]
+  // 头部菜单 key
+  headerMenuKeys: string[]
 }
 
 export const useUserStore = defineStore('user-store', () => {
@@ -45,61 +47,52 @@ export const useUserStore = defineStore('user-store', () => {
     isInitAuthRoute: false,
     menus: [],
     info: null,
-    cacheRoutes: []
+    cacheRoutes: [],
+    headerMenuKeys: []
   })
 
   function updateRootRedirect(menus) {
     const menusTree = listToTree(menus)
     const newRedirect = findFirstLeaves(menusTree[0]).url
-    const routRoute = { ...RootRoute, redirect: newRedirect }
-    router.addRoute(routRoute)
+    const rootRoute = { ...RootRoute, redirect: newRedirect }
+    router.addRoute(rootRoute)
   }
 
   function handleAuthRoute(menus) {
-    const menusTree = listToTree(menus)
+    const map: Recordable = {}
+    const rootRoute = {
+      path: '/',
+      name: PageEnum.ROOT_NAME,
+      redirect: PageEnum.ROOT_REDIRECT,
+      children: [] as any[]
+    }
     const modules = import.meta.glob(['@/views/**/**.vue', '!**/components/**/**.vue'])
 
-    function fn(tree) {
-      for (const node of tree) {
-        let vueRoutes = {} as RouteRecordRaw
-        const comPath = Object.keys(modules).find(key => key.includes(`${node.url}/index.vue`))
-        const menuName = node.url.substring(node.url.lastIndexOf('/') + 1)
-        if (node.type === 0) {
-          vueRoutes = {
-            path: node.url,
-            name: menuName,
-            redirect: node?.children[0].url || '/404',
-            meta: {
-              name: node.name,
-              perms: node.perms,
-              icon: node.icon
-            }
-          }
-        } else if (node.type === 1 && comPath) {
-          vueRoutes = {
-            path: node.url,
-            component: BASIC_LAYOUT,
-            children: [
-              {
-                path: node.url,
-                name: menuName,
-                component: modules[comPath],
-                meta: {
-                  name: node.name,
-                  perms: node.perms,
-                  icon: node.icon
-                }
-              }
-            ]
-          }
-          state.cacheRoutes.push(menuName)
+    for (const menu of menus) {
+      map[menu.id] = {
+        path: menu.url,
+        name: menu.url.substring(menu.url.lastIndexOf('/') + 1),
+        meta: { title: menu.name, icon: menu.icon, perms: menu.perms }
+      }
+      if (map[menu.parentId]) {
+        if (menu.type === 0) {
+          map[menu.id].component = BLANK_LAYOUT
+        } else {
+          map[menu.id].component = modules[`/src/views${menu.url}/index.vue`]
         }
-        vueRoutes && router.addRoute(vueRoutes)
-        node.children?.length && fn(node.children)
+        if (!map[menu.parentId].redirect) {
+          map[menu.parentId].redirect = menu.url
+          map[menu.parentId].children = []
+        }
+        map[menu.parentId].children.push(map[menu.id])
+      } else {
+        map[menu.id].component = BASIC_LAYOUT
+        rootRoute.children.push(map[menu.id])
+        if (!rootRoute.redirect) rootRoute.redirect = menu.url
       }
     }
 
-    fn(menusTree)
+    router.addRoute(rootRoute)
   }
 
   async function initDynamicRoute() {
@@ -123,5 +116,9 @@ export const useUserStore = defineStore('user-store', () => {
     return []
   })
 
-  return { ...toRefs(state), permissions, initDynamicRoute }
+  function changeHeaderMenuKeys(selectedKeys) {
+    state.headerMenuKeys = selectedKeys
+  }
+
+  return { ...toRefs(state), permissions, initDynamicRoute, changeHeaderMenuKeys }
 })

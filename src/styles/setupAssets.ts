@@ -1,3 +1,4 @@
+import 'ant-design-vue/dist/antd.variable.min.css'
 import 'ant-design-vue/es/message/style/css'
 import 'ant-design-vue/es/modal/style/css'
 import 'ant-design-vue/es/notification/style/css'

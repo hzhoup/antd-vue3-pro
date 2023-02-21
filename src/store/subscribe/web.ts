@@ -1,5 +1,6 @@
 import { DeviceTypeEnum } from '@/setting/pageEnum'
 import { useSettingStore } from '@/store/modules/setting'
+import { useUserStore } from '@/store/modules/user'
 
 export default function subscribeWebStore() {
   const breakpoints = useBreakpoints({
@@ -8,6 +9,8 @@ export default function subscribeWebStore() {
     desktop: 1280
   })
   const setting = useSettingStore()
+  const user = useUserStore()
+  const route = useRoute()
   const scope = effectScope()
 
   scope.run(() => {
@@ -20,6 +23,21 @@ export default function subscribeWebStore() {
         else setting.device = DeviceTypeEnum.DESKTOP
       },
       { immediate: true, deep: true }
+    )
+
+    // 监听路由变化, 更新菜单key
+    watch(
+      () => route.matched,
+      newValue => {
+        let headerMenuKeys: string[]
+        if (newValue.length >= 3) {
+          headerMenuKeys = [newValue[newValue.length - 2].name as string]
+        } else {
+          headerMenuKeys = [newValue.pop()?.name as string]
+        }
+        user.changeHeaderMenuKeys(headerMenuKeys)
+      },
+      { immediate: true }
     )
   })
 

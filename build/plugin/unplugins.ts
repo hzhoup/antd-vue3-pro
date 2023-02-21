@@ -34,7 +34,7 @@ export const configUnplugins = () => {
         { 'lodash-es': ['isNil', 'set', 'isString', 'filter', 'minBy'] }
       ],
       eslintrc: {
-        enabled: true,
+        enabled: false,
         filepath: './.eslintrc-auto-import.json',
         globalsPropValue: true
       },

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite-plugin-windicss'
-import { primaryColor } from './build/config/theme'
+import colors from 'windicss/colors'
 
 export default defineConfig({
   darkMode: 'class',
@@ -7,7 +7,24 @@ export default defineConfig({
   plugins: [createEnterPlugin()],
   theme: {
     colors: {
-      primary: primaryColor
+      ...colors,
+      primary: 'var(--ant-primary-color)',
+      primary_hover: 'var(--ant-primary-color-hover)',
+      primary_active: 'var(--ant-primary-color-active)',
+      primary_outline: 'var(--ant-primary-color-outline)',
+      success: 'var(--ant-success-color)',
+      success_hover: 'var(--ant-success-color-hover)',
+      success_active: 'var(--ant-success-color-active)',
+      success_outline: 'var(--ant-success-color-outline)',
+      error: 'var(--ant-error-color)',
+      error_hover: 'var(--ant-error-color-hover)',
+      error_active: 'var(--ant-error-color-active)',
+      error_outline: 'var(--ant-error-color-outline)',
+      warning: 'var(--ant-warning-color)',
+      warning_hover: 'var(--ant-warning-color-hover)',
+      warning_active: 'var(--ant-warning-color-active)',
+      warning_outline: 'var(--ant-warning-color-outline)',
+      info: 'var(--ant-info-color)'
     },
     screens: {
       tablet: '640px',
